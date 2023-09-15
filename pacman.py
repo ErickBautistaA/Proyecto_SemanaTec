@@ -91,6 +91,7 @@ def valid(point):
 
 def world():
     """Draw world using path."""
+    "con esto podemos cambiar el color del escenario"
     bgcolor('black')
     path.color('blue')
 
@@ -130,7 +131,7 @@ def move():
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
-
+#Movimiento de los fantasmas
     for point, course in ghosts:
         if valid(point + course):
             point.move(course)
@@ -154,8 +155,8 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-
-    ontimer(move, 100)
+# ontimer sirve para el movimiento de los fantasmas y pacman 
+    ontimer(move, 50)
 
 
 def change(x, y):
