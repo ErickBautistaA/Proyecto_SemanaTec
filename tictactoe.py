@@ -1,11 +1,22 @@
 """Tic Tac Toe"""
 
-from turtle import *
+from turtle import color
+from turtle import up
+from turtle import goto
+from turtle import down
+from turtle import circle
+from turtle import update
+from turtle import setup
+from turtle import hideturtle
+from turtle import tracer
+from turtle import onscreenclick
+from turtle import done
 
 from freegames import line
 
 """Inicia una cuadrícula con las celdas vacías."""
 grid_state = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
+
 
 def grid():
     """Dibuja la cuadrícula de tic-tac-toe."""
@@ -35,6 +46,7 @@ def floor(value):
     """Redondea el valor a la cuadrícula con un tamaño cuadrado de 133."""
     return ((value + 200) // 133) * 133 - 200
 
+
 """Crea un estado para determinar los turnos"""
 state = {'player': 0}
 """Crea una lista de jugadores"""
@@ -46,6 +58,7 @@ def spot_taken(x, y):
     row = int((y + 200) // 133)
     col = int((x + 200) // 133)
     return grid_state[row][col] != -1
+
 
 def tap(x, y):
     """Dibuja X o O en el cuadrado picado"""
@@ -64,7 +77,7 @@ def tap(x, y):
         row = int((y + 200) // 133)
         col = int((x + 200) // 133)
         grid_state[row][col] = player
- 
+
 
 setup(420, 420, 370, 0)
 hideturtle()
