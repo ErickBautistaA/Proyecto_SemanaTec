@@ -1,20 +1,14 @@
-"""Tic Tac Toe
-
-Exercises
-
-1. Give the X and O a different color and width.
-2. What happens when someone taps a taken spot?
-3. How would you detect when someone has won?
-4. How could you create a computer player?
-"""
+"""Tic Tac Toe"""
 
 from turtle import *
 
 from freegames import line
 
+"""Inicia una cuadrícula con las celdas vacías."""
+grid_state = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
 
 def grid():
-    """Draw tic-tac-toe grid."""
+    """Dibuja la cuadrícula de tic-tac-toe."""
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
@@ -22,14 +16,14 @@ def grid():
 
 
 def drawx(x, y):
-    """Draw X player."""
+    """Dibuja al jugador X."""
     color('purple')
     line(x + 90, y + 90, x + 50, y + 50)
     line(x + 90, y + 50, x + 50, y + 90)
 
 
 def drawo(x, y):
-    """Draw O player."""
+    """Dibuja al jugador O."""
     color('green')
     up()
     goto(x + 70, y + 40)
@@ -38,29 +32,45 @@ def drawo(x, y):
 
 
 def floor(value):
-    """Round value down to grid with square size 133."""
+    """Redondea el valor a la cuadrícula con un tamaño cuadrado de 133."""
     return ((value + 200) // 133) * 133 - 200
 
-
+"""Crea un estado para determinar los turnos"""
 state = {'player': 0}
+"""Crea una lista de jugadores"""
 players = [drawx, drawo]
 
 
+def spot_taken(x, y):
+    """Checa si el espacio en la cuadrícula ha sido tomado."""
+    row = int((y + 200) // 133)
+    col = int((x + 200) // 133)
+    return grid_state[row][col] != -1
+
 def tap(x, y):
-    """Draw X or O in tapped square."""
+    """Dibuja X o O en el cuadrado picado"""
     x = floor(x)
     y = floor(y)
     player = state['player']
-    draw = players[player]
-    draw(x, y)
-    update()
-    state['player'] = not player
 
+    """Si no ha sido tomado por el otro jugador el espacio podra ser usado"""
+    if not spot_taken(x, y):
+        draw = players[player]
+        draw(x, y)
+        update()
+        state['player'] = not player
+
+        """Actualiza el estado de grid-state con el movimiento del jugador."""
+        row = int((y + 200) // 133)
+        col = int((x + 200) // 133)
+        grid_state[row][col] = player
+ 
 
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 grid()
 update()
+"""Habilita el click para realizar la función tap"""
 onscreenclick(tap)
 done()
