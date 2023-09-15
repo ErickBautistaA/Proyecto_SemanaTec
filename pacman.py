@@ -27,6 +27,10 @@ from turtle import done
 
 from freegames import floor, vector
 
+# Se inicializan las variables que se van a usar
+
+
+# Se define las posiciones de los fantasmas y pacman
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
@@ -39,6 +43,8 @@ ghosts = [
     [vector(100, -160), vector(-5, 0)],
 ]
 # fmt: off
+
+
 # tablero de juego los 1 son los pasillos
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -65,6 +71,7 @@ tiles = [
 # fmt: on
 
 
+# Se crea el cuadro de juego usando cordenadas cartesianas.
 def square(x, y):
     """Draw square using path at (x, y)."""
     path.up()
@@ -121,6 +128,8 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
+# Fuencion para el movimiento de los fantasmas y pacman
+
 
 def move():
     """Move pacman and all ghosts."""
@@ -168,10 +177,11 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-# ontimer sirve para el movimiento de los fantasmas y pacman
+# ontimer se puede modificar para aumentar la velocidad de movimiento
     ontimer(move, 50)
 
 
+# cambio de direccion
 def change(x, y):
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
@@ -186,6 +196,7 @@ writer.goto(160, 160)
 writer.color('white')
 writer.write(state['score'])
 listen()
+# Definimos las teclas de movimiento y lo que tiene que hacer
 onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
