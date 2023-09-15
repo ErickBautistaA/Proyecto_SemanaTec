@@ -10,7 +10,20 @@ Exercises
 """
 
 from random import choice
-from turtle import *
+from turtle import Turtle
+from turtle import bgcolor
+from turtle import clear
+from turtle import up
+from turtle import dot
+from turtle import goto
+from turtle import update
+from turtle import ontimer
+from turtle import setup
+from turtle import hideturtle
+from turtle import tracer
+from turtle import listen
+from turtle import onkey
+from turtle import done
 
 from freegames import floor, vector
 
@@ -26,7 +39,7 @@ ghosts = [
     [vector(100, -160), vector(-5, 0)],
 ]
 # fmt: off
-# tablero de juego los 1 son los pasillos  
+# tablero de juego los 1 son los pasillos
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -91,7 +104,7 @@ def valid(point):
 
 def world():
     """Draw world using path."""
-    "con esto podemos cambiar el color del escenario"
+    # con esto podemos cambiar el color del escenario
     bgcolor('black')
     path.color('blue')
 
@@ -131,7 +144,7 @@ def move():
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
-#Movimiento de los fantasmas
+    # Movimiento de los fantasmas
     for point, course in ghosts:
         if valid(point + course):
             point.move(course)
@@ -155,7 +168,7 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-# ontimer sirve para el movimiento de los fantasmas y pacman 
+# ontimer sirve para el movimiento de los fantasmas y pacman
     ontimer(move, 50)
 
 
